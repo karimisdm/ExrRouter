@@ -2,11 +2,12 @@
 import { ref } from 'vue';
 import Title from './title.vue';
 import Pad from './pad.vue';
+import Crew from '@/pages/crew.vue';
 
   const latestLaunch = ref(null);
 
   const fetchLatestLaunch = async()=>{
-    const response = await fetch("https://developer.mozilla.org/en-US/docs/Web/HTTP/Status");
+    const response = await fetch("https://api.spacexdata.com/v5/launches/latest");
     if(response.ok){
         const result= await response.json();
         latestLaunch.value= result;
@@ -16,14 +17,12 @@ import Pad from './pad.vue';
   }
  fetchLatestLaunch();
 </script>
-
-
 <template>
-    <div>
-        this is Latest page
-    </div>
     <div v-if="latestLaunch">
-      <pre>{{ latestLaunch }}</pre>
-      <Title :name="latestLaunch.name" :logo="latestLaunch.links.path.small"></Title>
+        <Title :name="latestLaunch.name" :logo="latestLaunch.links.patch.small"/>
+        <!-- <Pad :id="latestLaunch.launchpad"/> -->
+         <Crew :crow="latestLaunch.crew"/>
+         {{ latestLaunch.crew}}
     </div>
+    
 </template>

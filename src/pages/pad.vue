@@ -4,7 +4,7 @@ const props = defineProps(["id"]);
 const pad= ref(null);
 
 const fetchPadDetail = async()=> {
-    const response = await fetch(`"https://api.spacexdata.com/v5/launches/${props.id}"`);
+    const response = await fetch(`https://api.spacexdata.com/v4/payloads/${props.id}`);
     if(response.ok){
         const result= await response.json();
         pad.value= result;
